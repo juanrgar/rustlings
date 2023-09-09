@@ -40,6 +40,15 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+        if scores.contains_key(&team_1_name) {
+            let &mut v = scores.get(&team_1_name)?;
+            scores.insert(team_1_name, v);
+        } else {
+            let v = Team{name : team_1_name,
+                goals_scored : team_1_score,
+                goals_conceded : team_2_score};
+            scores.insert(team_1_name, v);
+        }
     }
     scores
 }
